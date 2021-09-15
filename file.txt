@@ -1,0 +1,54 @@
+mysql> show tables
+    -> ;
++-------------------+
+| Tables_in_Chinook |
++-------------------+
+| Album             |
+| Artist            |
+| Customer          |
+| Employee          |
+| Genre             |
+| Invoice           |
+| InvoiceLine       |
+| MediaType         |
+| Playlist          |
+| PlaylistTrack     |
+| Track             |
++-------------------+
+11 rows in set (0.00 sec)
+
+
+mysql> desc Invoice
+    -> ;
++-------------------+---------------+------+-----+---------+----------------+
+| Field             | Type          | Null | Key | Default | Extra          |
++-------------------+---------------+------+-----+---------+----------------+
+| InvoiceId         | int           | NO   | PRI | NULL    | auto_increment |
+| CustomerId        | int           | NO   | MUL | NULL    |                |
+| InvoiceDate       | datetime      | NO   |     | NULL    |                |
+| BillingAddress    | varchar(70)   | YES  |     | NULL    |                |
+| BillingCity       | varchar(40)   | YES  |     | NULL    |                |
+| BillingState      | varchar(40)   | YES  |     | NULL    |                |
+| BillingCountry    | varchar(40)   | YES  |     | NULL    |                |
+| BillingPostalCode | varchar(10)   | YES  |     | NULL    |                |
+| Total             | decimal(10,2) | NO   |     | NULL    |                |
++-------------------+---------------+------+-----+---------+----------------+
+9 rows in set (0.00 sec)
+
+mysql> notee;
+mysql> source test.sql
++----------+
+| count(*) |
++----------+
+|     3503 |
++----------+
+1 row in set (0.00 sec)
+
++----------+
+| count(*) |
++----------+
+|      275 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> notee;
