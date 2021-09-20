@@ -391,30 +391,52 @@ mysql> SELECT Employee.FirstName AS Employee, COUNT(Customer.FirstName) AS Custo
 mysql> SELECT MediaType.Name as MediaType, COUNT(Track.MediaType) AS Tracks From MediaType
     -> JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId
     -> ;
+
 ERROR 1054 (42S22): Unknown column 'Track.MediaType' in 'field list'
+
 mysql> SELECT MediaType.Name as MediaType, COUNT(Track.MediaTypeId) AS Tracks From MediaType JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId;
+
 ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'Chinook.MediaType.Name'; this is incompatible with sql_mode=only_full_group_by
+
 mysql> SELECT MediaType as MediaType, COUNT(Track.MediaTypeId) AS Tracks From MediaType JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId;
+
 ERROR 1054 (42S22): Unknown column 'MediaType' in 'field list'
+
 mysql> SELECT Name  as MediaType, COUNT(Track.MediaTypeId) AS Tracks From MediaType JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId;
+
 ERROR 1052 (23000): Column 'Name' in field list is ambiguous
+
 mysql> SELECT MediaType, COUNT(Track.MediaTypeId) AS Tracks From MediaType
     -> JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId;
+
 ERROR 1054 (42S22): Unknown column 'MediaType' in 'field list'
+
 mysql> SELECT MediaTypeId, COUNT(Track.MediaTypeId) AS Tracks From Track JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId;
+
 ERROR 1066 (42000): Not unique table/alias: 'Track'
+
 mysql> SELECT MediaTypeId, COUNT(Track.MediaTypeId) AS Tracks From Tracks JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId;
+
 ERROR 1146 (42S02): Table 'Chinook.Tracks' doesn't exist
+
 mysql> SELECT MediaTypeId, COUNT(Track.MediaTypeId) AS Tracks From Track INNER JOIN Track ON Track.MediaTypeId  = MediaType.MediaTypeId
     -> ;
+
 ERROR 1066 (42000): Not unique table/alias: 'Track'
+
 mysql> SELECT MediaTypeId as Type, COUNT(Track.MediaTypeId) AS Count From Track INNER JOIN Track ON MediaType.MediaTypeId  = Track.MediaTypeId;
+
 ERROR 1066 (42000): Not unique table/alias: 'Track'
+
 mysql> SELECT Track.MediaTypeId as Type, COUNT(Track.MediaTypeId) AS Count From Track INNER JOIN Track ON MediaType.MediaTypeId  = Track.MediaTypeId;
+
 ERROR 1066 (42000): Not unique table/alias: 'Track'
+
 mysql> desc Tracks
     -> ;
+
 ERROR 1146 (42S02): Table 'Chinook.Tracks' doesn't exist
+
 mysql> desc Track;
 +--------------+---------------+------+-----+---------+----------------+
 | Field        | Type          | Null | Key | Default | Extra          |
