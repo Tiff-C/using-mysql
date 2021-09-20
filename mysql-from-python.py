@@ -1,4 +1,5 @@
 import os
+# import datetime
 import pymysql
 
 # Get username from Cloud9 workspace
@@ -13,10 +14,9 @@ connection = pymysql.connect(host='localhost',
 
 try:
     with connection.cursor() as cursor:
-        cursor.execute("""CREATE TABLE IF NOT EXISTS
-                          Friends(name char(20), age int, DOB datetime);""")
-        # Note that the above will still display a warning (not error) if the
-        # table already exists
+        row = ("Bob", 21, "1990-02-06 23:04:56")
+        cursor.execute("INSERT INTO Friends VALUES (%s, %s, %s);", row)
+        connection.commit()
 finally:
     # Close the connection, whether or not the above was successful
     connection.close()
