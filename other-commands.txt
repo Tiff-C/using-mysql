@@ -495,3 +495,654 @@ mysql> SELECT MAX(HireDate) AS RecenHire FROM Employee;
 
 mysql> Terminal close -- exit!
 Aborted
+mysql> SELECT AVG(Total) FROM Invoice;
++------------+
+| AVG(Total) |
++------------+
+|   5.651942 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ROUND(AVG(Total), 2) FROM Invoice;
++----------------------+
+| ROUND(AVG(Total), 2) |
++----------------------+
+|                 5.65 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ROUND(AVG(Total), 1) FROM Invoice;
++----------------------+
+| ROUND(AVG(Total), 1) |
++----------------------+
+|                  5.7 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT TOTAL FROM Invoice
+    -> WHERE InviceId = 2;
+ERROR 1054 (42S22): Unknown column 'InviceId' in 'where clause'
+mysql> SELECT TOTAL FROM Invoice WHERE InvoiceId = 2;
++-------+
+| TOTAL |
++-------+
+|  3.96 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(UnitPrice * Quantity) FROM InvoiceLine
+    -> WHERE InvoiceId = 2;
++---------------------------+
+| SUM(UnitPrice * Quantity) |
++---------------------------+
+|                      3.96 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM  Track
+    -> GROUP BY AlbumId
+    -> LIMIT 50;
++----------+
+| COUNT(*) |
++----------+
+|       10 |
+|        1 |
+|        3 |
+|        8 |
+|       15 |
+|       13 |
+|       12 |
+|       14 |
+|        8 |
+|       14 |
+|       12 |
+|       12 |
+|        8 |
+|       13 |
+|        5 |
+|        7 |
+|       10 |
+|       17 |
+|       11 |
+|       11 |
+|       18 |
+|        3 |
+|       34 |
+|       23 |
+|       13 |
+|       17 |
+|       14 |
+|       10 |
+|       14 |
+|       14 |
+|        9 |
+|       14 |
+|       17 |
+|       17 |
+|       11 |
+|       17 |
+|       20 |
+|       12 |
+|       21 |
+|       12 |
+|       14 |
+|       14 |
+|        7 |
+|        6 |
+|       14 |
+|       13 |
+|       14 |
+|       13 |
+|       10 |
+|        4 |
++----------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT AlbumId, COUNT(*) FROM Track
+    -> GROUP BY AlbumId
+    -> LIMIT 50;
++---------+----------+
+| AlbumId | COUNT(*) |
++---------+----------+
+|       1 |       10 |
+|       2 |        1 |
+|       3 |        3 |
+|       4 |        8 |
+|       5 |       15 |
+|       6 |       13 |
+|       7 |       12 |
+|       8 |       14 |
+|       9 |        8 |
+|      10 |       14 |
+|      11 |       12 |
+|      12 |       12 |
+|      13 |        8 |
+|      14 |       13 |
+|      15 |        5 |
+|      16 |        7 |
+|      17 |       10 |
+|      18 |       17 |
+|      19 |       11 |
+|      20 |       11 |
+|      21 |       18 |
+|      22 |        3 |
+|      23 |       34 |
+|      24 |       23 |
+|      25 |       13 |
+|      26 |       17 |
+|      27 |       14 |
+|      28 |       10 |
+|      29 |       14 |
+|      30 |       14 |
+|      31 |        9 |
+|      32 |       14 |
+|      33 |       17 |
+|      34 |       17 |
+|      35 |       11 |
+|      36 |       17 |
+|      37 |       20 |
+|      38 |       12 |
+|      39 |       21 |
+|      40 |       12 |
+|      41 |       14 |
+|      42 |       14 |
+|      43 |        7 |
+|      44 |        6 |
+|      45 |       14 |
+|      46 |       13 |
+|      47 |       14 |
+|      48 |       13 |
+|      49 |       10 |
+|      50 |        4 |
++---------+----------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT Album.Title, COUNT(*) FROM Track
+    -> INNER JOIN Album ON Track.AlbumId = Album.AlbumId
+    -> GROUP BY Track.AlbumId
+    -> LIMIT 50;
++--------------------------------------------------+----------+
+| Title                                            | COUNT(*) |
++--------------------------------------------------+----------+
+| For Those About To Rock We Salute You            |       10 |
+| Balls to the Wall                                |        1 |
+| Restless and Wild                                |        3 |
+| Let There Be Rock                                |        8 |
+| Big Ones                                         |       15 |
+| Jagged Little Pill                               |       13 |
+| Facelift                                         |       12 |
+| Warner 25 Anos                                   |       14 |
+| Plays Metallica By Four Cellos                   |        8 |
+| Audioslave                                       |       14 |
+| Out Of Exile                                     |       12 |
+| BackBeat Soundtrack                              |       12 |
+| The Best Of Billy Cobham                         |        8 |
+| Alcohol Fueled Brewtality Live! [Disc 1]         |       13 |
+| Alcohol Fueled Brewtality Live! [Disc 2]         |        5 |
+| Black Sabbath                                    |        7 |
+| Black Sabbath Vol. 4 (Remaster)                  |       10 |
+| Body Count                                       |       17 |
+| Chemical Wedding                                 |       11 |
+| The Best Of Buddy Guy - The Millenium Collection |       11 |
+| Prenda Minha                                     |       18 |
+| Sozinho Remix Ao Vivo                            |        3 |
+| Minha Historia                                   |       34 |
+| Afrociberdelia                                   |       23 |
+| Da Lama Ao Caos                                  |       13 |
+| Acústico MTV [Live]                              |       17 |
+| Cidade Negra - Hits                              |       14 |
+| Na Pista                                         |       10 |
+| Axé Bahia 2001                                   |       14 |
+| BBC Sessions [Disc 1] [Live]                     |       14 |
+| Bongo Fury                                       |        9 |
+| Carnaval 2001                                    |       14 |
+| Chill: Brazil (Disc 1)                           |       17 |
+| Chill: Brazil (Disc 2)                           |       17 |
+| Garage Inc. (Disc 1)                             |       11 |
+| Greatest Hits II                                 |       17 |
+| Greatest Kiss                                    |       20 |
+| Heart of the Night                               |       12 |
+| International Superhits                          |       21 |
+| Into The Light                                   |       12 |
+| Meus Momentos                                    |       14 |
+| Minha História                                   |       14 |
+| MK III The Final Concerts [Disc 1]               |        7 |
+| Physical Graffiti [Disc 1]                       |        6 |
+| Sambas De Enredo 2001                            |       14 |
+| Supernatural                                     |       13 |
+| The Best of Ed Motta                             |       14 |
+| The Essential Miles Davis [Disc 1]               |       13 |
+| The Essential Miles Davis [Disc 2]               |       10 |
+| The Final Concerts (Disc 2)                      |        4 |
++--------------------------------------------------+----------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT AlbumId, MIN(UnitPrice) FROM Track
+    -> GROUP BY AlbumId
+    -> LIMIT 50;
++---------+----------------+
+| AlbumId | MIN(UnitPrice) |
++---------+----------------+
+|       1 |           0.99 |
+|       2 |           0.99 |
+|       3 |           0.99 |
+|       4 |           0.99 |
+|       5 |           0.99 |
+|       6 |           0.99 |
+|       7 |           0.99 |
+|       8 |           0.99 |
+|       9 |           0.99 |
+|      10 |           0.99 |
+|      11 |           0.99 |
+|      12 |           0.99 |
+|      13 |           0.99 |
+|      14 |           0.99 |
+|      15 |           0.99 |
+|      16 |           0.99 |
+|      17 |           0.99 |
+|      18 |           0.99 |
+|      19 |           0.99 |
+|      20 |           0.99 |
+|      21 |           0.99 |
+|      22 |           0.99 |
+|      23 |           0.99 |
+|      24 |           0.99 |
+|      25 |           0.99 |
+|      26 |           0.99 |
+|      27 |           0.99 |
+|      28 |           0.99 |
+|      29 |           0.99 |
+|      30 |           0.99 |
+|      31 |           0.99 |
+|      32 |           0.99 |
+|      33 |           0.99 |
+|      34 |           0.99 |
+|      35 |           0.99 |
+|      36 |           0.99 |
+|      37 |           0.99 |
+|      38 |           0.99 |
+|      39 |           0.99 |
+|      40 |           0.99 |
+|      41 |           0.99 |
+|      42 |           0.99 |
+|      43 |           0.99 |
+|      44 |           0.99 |
+|      45 |           0.99 |
+|      46 |           0.99 |
+|      47 |           0.99 |
+|      48 |           0.99 |
+|      49 |           0.99 |
+|      50 |           0.99 |
++---------+----------------+
+50 rows in set (0.01 sec)
+
+mysql> SELECT AlbumId, MAX(UnitPrice) FROM Track
+    -> GROUP BY AlbumId
+    -> LIMIT 50;
++---------+----------------+
+| AlbumId | MAX(UnitPrice) |
++---------+----------------+
+|       1 |           0.99 |
+|       2 |           0.99 |
+|       3 |           0.99 |
+|       4 |           0.99 |
+|       5 |           0.99 |
+|       6 |           0.99 |
+|       7 |           0.99 |
+|       8 |           0.99 |
+|       9 |           0.99 |
+|      10 |           0.99 |
+|      11 |           0.99 |
+|      12 |           0.99 |
+|      13 |           0.99 |
+|      14 |           0.99 |
+|      15 |           0.99 |
+|      16 |           0.99 |
+|      17 |           0.99 |
+|      18 |           0.99 |
+|      19 |           0.99 |
+|      20 |           0.99 |
+|      21 |           0.99 |
+|      22 |           0.99 |
+|      23 |           0.99 |
+|      24 |           0.99 |
+|      25 |           0.99 |
+|      26 |           0.99 |
+|      27 |           0.99 |
+|      28 |           0.99 |
+|      29 |           0.99 |
+|      30 |           0.99 |
+|      31 |           0.99 |
+|      32 |           0.99 |
+|      33 |           0.99 |
+|      34 |           0.99 |
+|      35 |           0.99 |
+|      36 |           0.99 |
+|      37 |           0.99 |
+|      38 |           0.99 |
+|      39 |           0.99 |
+|      40 |           0.99 |
+|      41 |           0.99 |
+|      42 |           0.99 |
+|      43 |           0.99 |
+|      44 |           0.99 |
+|      45 |           0.99 |
+|      46 |           0.99 |
+|      47 |           0.99 |
+|      48 |           0.99 |
+|      49 |           0.99 |
+|      50 |           0.99 |
++---------+----------------+
+50 rows in set (0.01 sec)
+
+mysql> SELECT AlbumId, ROUND(SUM(UnitPrice), 2) FROM Track
+    -> GROUP BY AlbumId
+    -> LIMIT 50;
++---------+--------------------------+
+| AlbumId | ROUND(SUM(UnitPrice), 2) |
++---------+--------------------------+
+|       1 |                     9.90 |
+|       2 |                     0.99 |
+|       3 |                     2.97 |
+|       4 |                     7.92 |
+|       5 |                    14.85 |
+|       6 |                    12.87 |
+|       7 |                    11.88 |
+|       8 |                    13.86 |
+|       9 |                     7.92 |
+|      10 |                    13.86 |
+|      11 |                    11.88 |
+|      12 |                    11.88 |
+|      13 |                     7.92 |
+|      14 |                    12.87 |
+|      15 |                     4.95 |
+|      16 |                     6.93 |
+|      17 |                     9.90 |
+|      18 |                    16.83 |
+|      19 |                    10.89 |
+|      20 |                    10.89 |
+|      21 |                    17.82 |
+|      22 |                     2.97 |
+|      23 |                    33.66 |
+|      24 |                    22.77 |
+|      25 |                    12.87 |
+|      26 |                    16.83 |
+|      27 |                    13.86 |
+|      28 |                     9.90 |
+|      29 |                    13.86 |
+|      30 |                    13.86 |
+|      31 |                     8.91 |
+|      32 |                    13.86 |
+|      33 |                    16.83 |
+|      34 |                    16.83 |
+|      35 |                    10.89 |
+|      36 |                    16.83 |
+|      37 |                    19.80 |
+|      38 |                    11.88 |
+|      39 |                    20.79 |
+|      40 |                    11.88 |
+|      41 |                    13.86 |
+|      42 |                    13.86 |
+|      43 |                     6.93 |
+|      44 |                     5.94 |
+|      45 |                    13.86 |
+|      46 |                    12.87 |
+|      47 |                    13.86 |
+|      48 |                    12.87 |
+|      49 |                     9.90 |
+|      50 |                     3.96 |
++---------+--------------------------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT Album.Title, ROUND(SUM(UnitPrice), 2) FROM Track
+    -> INNER JOIN Album ON Track.AlbumId = Album.AlbumId
+    -> GROUP BY Track.AlbumId
+    -> LIMIT 50;
++--------------------------------------------------+--------------------------+
+| Title                                            | ROUND(SUM(UnitPrice), 2) |
++--------------------------------------------------+--------------------------+
+| For Those About To Rock We Salute You            |                     9.90 |
+| Balls to the Wall                                |                     0.99 |
+| Restless and Wild                                |                     2.97 |
+| Let There Be Rock                                |                     7.92 |
+| Big Ones                                         |                    14.85 |
+| Jagged Little Pill                               |                    12.87 |
+| Facelift                                         |                    11.88 |
+| Warner 25 Anos                                   |                    13.86 |
+| Plays Metallica By Four Cellos                   |                     7.92 |
+| Audioslave                                       |                    13.86 |
+| Out Of Exile                                     |                    11.88 |
+| BackBeat Soundtrack                              |                    11.88 |
+| The Best Of Billy Cobham                         |                     7.92 |
+| Alcohol Fueled Brewtality Live! [Disc 1]         |                    12.87 |
+| Alcohol Fueled Brewtality Live! [Disc 2]         |                     4.95 |
+| Black Sabbath                                    |                     6.93 |
+| Black Sabbath Vol. 4 (Remaster)                  |                     9.90 |
+| Body Count                                       |                    16.83 |
+| Chemical Wedding                                 |                    10.89 |
+| The Best Of Buddy Guy - The Millenium Collection |                    10.89 |
+| Prenda Minha                                     |                    17.82 |
+| Sozinho Remix Ao Vivo                            |                     2.97 |
+| Minha Historia                                   |                    33.66 |
+| Afrociberdelia                                   |                    22.77 |
+| Da Lama Ao Caos                                  |                    12.87 |
+| Acústico MTV [Live]                              |                    16.83 |
+| Cidade Negra - Hits                              |                    13.86 |
+| Na Pista                                         |                     9.90 |
+| Axé Bahia 2001                                   |                    13.86 |
+| BBC Sessions [Disc 1] [Live]                     |                    13.86 |
+| Bongo Fury                                       |                     8.91 |
+| Carnaval 2001                                    |                    13.86 |
+| Chill: Brazil (Disc 1)                           |                    16.83 |
+| Chill: Brazil (Disc 2)                           |                    16.83 |
+| Garage Inc. (Disc 1)                             |                    10.89 |
+| Greatest Hits II                                 |                    16.83 |
+| Greatest Kiss                                    |                    19.80 |
+| Heart of the Night                               |                    11.88 |
+| International Superhits                          |                    20.79 |
+| Into The Light                                   |                    11.88 |
+| Meus Momentos                                    |                    13.86 |
+| Minha História                                   |                    13.86 |
+| MK III The Final Concerts [Disc 1]               |                     6.93 |
+| Physical Graffiti [Disc 1]                       |                     5.94 |
+| Sambas De Enredo 2001                            |                    13.86 |
+| Supernatural                                     |                    12.87 |
+| The Best of Ed Motta                             |                    13.86 |
+| The Essential Miles Davis [Disc 1]               |                    12.87 |
+| The Essential Miles Davis [Disc 2]               |                     9.90 |
+| The Final Concerts (Disc 2)                      |                     3.96 |
++--------------------------------------------------+--------------------------+
+50 rows in set (0.01 sec)
+
+mysql> SELECT COUNT(*) FROM Customer
+    -> GROUP BY City
+    -> WHERE City = 'Berlin';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE City = 'Berlin'' at line 3
+mysql> SELECT COUNT(*) FROM Customer
+    -> GROUP BY Customer.City
+    -> WHERE Customer.City = 'Berlin';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE Customer.City = 'Berlin'' at line 3
+mysql> SELECT COUNT(*) FROM Customer
+    -> GROUP BY City 
+    -> ;
++----------+
+| COUNT(*) |
++----------+
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|        1 |
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
++----------+
+53 rows in set (0.01 sec)
+
+mysql> SELECT Customer.City as City, COUNT(*)
+    -> GROUP BY City;
+ERROR 1109 (42S02): Unknown table 'Customer' in field list
+mysql> SELECT Customer.City as City, COUNT(*) FROM Customer GROUP BY City;
++-----------------------+----------+
+| City                  | COUNT(*) |
++-----------------------+----------+
+| São José dos Campos   |        1 |
+| Stuttgart             |        1 |
+| Montréal              |        1 |
+| Oslo                  |        1 |
+| Prague                |        2 |
+| Vienne                |        1 |
+| Brussels              |        1 |
+| Copenhagen            |        1 |
+| São Paulo             |        2 |
+| Rio de Janeiro        |        1 |
+| Brasília              |        1 |
+| Edmonton              |        1 |
+| Vancouver             |        1 |
+| Mountain View         |        2 |
+| Redmond               |        1 |
+| New York              |        1 |
+| Cupertino             |        1 |
+| Reno                  |        1 |
+| Orlando               |        1 |
+| Boston                |        1 |
+| Chicago               |        1 |
+| Madison               |        1 |
+| Fort Worth            |        1 |
+| Tucson                |        1 |
+| Salt Lake City        |        1 |
+| Toronto               |        1 |
+| Ottawa                |        1 |
+| Halifax               |        1 |
+| Winnipeg              |        1 |
+| Yellowknife           |        1 |
+| Lisbon                |        1 |
+| Porto                 |        1 |
+| Berlin                |        2 |
+| Frankfurt             |        1 |
+| Paris                 |        2 |
+| Lyon                  |        1 |
+| Bordeaux              |        1 |
+| Dijon                 |        1 |
+| Helsinki              |        1 |
+| Budapest              |        1 |
+| Dublin                |        1 |
+| Rome                  |        1 |
+| Amsterdam             |        1 |
+| Warsaw                |        1 |
+| Madrid                |        1 |
+| Stockholm             |        1 |
+| London                |        2 |
+| Edinburgh             |        1 |
+| Sidney                |        1 |
+| Buenos Aires          |        1 |
+| Santiago              |        1 |
+| Delhi                 |        1 |
+| Bangalore             |        1 |
++-----------------------+----------+
+53 rows in set (0.01 sec)
+
+mysql> SELECT Customer.City as City, COUNT(*) FROM Customer GROUP BY City WHERE Customer.City = 'Berlin';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE Customer.City = 'Berlin'' at line 1
+mysql> SELECT Customer.City as City, COUNT(*) FROM Customer GROUP BY City WHERE Customer.City = Berlin;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE Customer.City = Berlin' at line 1
+mysql> SELECT Customer.City as City, COUNT(*) FROM Customer GROUP BY City WHERE Customer.City = "Berlin";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE Customer.City = "Berlin"' at line 1
+mysql> SELECT Customer.City as City, COUNT(*) FROM Customer GROUP BY City WHERE City = "Berlin";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE City = "Berlin"' at line 1
+mysql> SELECT COUNT(city) FROM Customer WHERE city = "Berlin";
++-------------+
+| COUNT(city) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> desc InvoiceLine;
++---------------+---------------+------+-----+---------+----------------+
+| Field         | Type          | Null | Key | Default | Extra          |
++---------------+---------------+------+-----+---------+----------------+
+| InvoiceLineId | int           | NO   | PRI | NULL    | auto_increment |
+| InvoiceId     | int           | NO   | MUL | NULL    |                |
+| TrackId       | int           | NO   | MUL | NULL    |                |
+| UnitPrice     | decimal(10,2) | NO   |     | NULL    |                |
+| Quantity      | int           | NO   |     | NULL    |                |
++---------------+---------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(QUANTITY) FROM INVOICE
+    -> LIMIT 2;
+ERROR 1146 (42S02): Table 'Chinook.INVOICE' doesn't exist
+mysql> SELECT SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity), Track.Name AS Track FROM InvoiceLine
+    -> JOIN Track ON InvoiceLine.TrackId = Track.TrackId
+    -> WHERE Track.Name = "The Woman King";
++---------------------------------------------------+----------------+
+| SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) | Track          |
++---------------------------------------------------+----------------+
+|                                              3.98 | The Woman King |
++---------------------------------------------------+----------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT Artist.Name AS Artist, COUNT(Track.TrackId) AS Track FROM Artist
+    -> JOIN Album ON Artist.ArtistId = Album.ArtistId
+    -> JOIN Track ON Album.AlbumId = Track.AlbumId
+    -> GROUP BY Artist.Name
+    -> ORDER BY COUNT(Artist.Name)
+    -> DESC LIMIT 5;
++--------------+-------+
+| Artist       | Track |
++--------------+-------+
+| Iron Maiden  |   213 |
+| U2           |   135 |
+| Led Zeppelin |   114 |
+| Metallica    |   112 |
+| Lost         |    92 |
++--------------+-------+
+5 rows in set (0.01 sec)
+
+mysql> NOTEE;
